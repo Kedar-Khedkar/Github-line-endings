@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Line Endings",
+  "version": "1.0",
+  "description": "Shows LF/CRLF line endings on GitHub file and pull request pages.",
+  "host_permissions": [
+    "https://github.com/*",
+    "https://raw.githubusercontent.com/*",
+    "https://patch-diff.githubusercontent.com/*"
+  ],
+  "icons": { "128": "icon128.png" },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [{ "matches": ["https://github.com/*"], "js": ["content.js"] }]
+}

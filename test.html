@@ -1,0 +1,29 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Line ending self-test</title>
+<!-- Open this file in a browser; it prints PASS or the failing check. -->
+<script src="content.js"></script>
+<pre id="out"></pre>
+<script>
+  const eq = (a, b) => { if (JSON.stringify(a) !== JSON.stringify(b)) throw new Error(JSON.stringify(a) + ' != ' + JSON.stringify(b)); };
+  try {
+    eq(ending('a\r\nb\r\n'.split('\n').slice(0, -1)), 'CRLF');
+    eq(ending('a\nb\n'.split('\n').slice(0, -1)), 'LF');
+    eq(ending('a\r\nb\nc\n'.split('\n').slice(0, -1)), 'Mixed (1 CRLF, 2 LF)');
+    eq(ending('no newline'.split('\n').slice(0, -1)), 'none');
+    eq(isBinary('\x89PNG\r\n\x1a\n\0\0\0\rIHDR'), true);
+    eq(isBinary('text\r\n'), false);
+    const diff = [
+      'diff --git a/win.txt b/win.txt', 'index 1..2 100644', '--- a/win.txt', '+++ b/win.txt',
+      '@@ -1,2 +1,2 @@', ' keep\r', '-old\r', '+new\r', '\\ No newline at end of file',
+      'diff --git a/unix.js b/unix.js', 'new file mode 100644', '--- /dev/null', '+++ b/unix.js',
+      '@@ -0,0 +1 @@', '+++x', '+y',
+      'diff --git a/gone.txt b/gone.txt', 'deleted file mode 100644', '--- a/gone.txt', '+++ /dev/null',
+      '@@ -1 +0,0 @@', '-bye\r', '',
+      'diff --git "a/\\303\\244.txt" "b/\\303\\244.txt"', '--- "a/\\303\\244.txt"', '+++ "b/\\303\\244.txt"',
+      '@@ -1 +1 @@', '+x\r', '',
+    ].join('\n');
+    eq(parseDiff(diff), [['win.txt', 'CRLF'], ['unix.js', 'LF'], ['\\303\\244.txt', 'CRLF']]);
+    out.textContent = 'PASS';
+  } catch (e) { out.textContent = 'FAIL: ' + e.message; }
+</script>
