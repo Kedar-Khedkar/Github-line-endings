@@ -30,6 +30,7 @@ Works in Chrome and Edge. Private repos use your existing GitHub login.
 ## How it works
 
 - `content.js` runs on github.com pages. It watches the URL (GitHub changes pages without reloading) and draws the box.
+- `welcome.html` opens once, right after the extension is installed.
 - `background.js` downloads the data, because the PR `.diff` redirects to `patch-diff.githubusercontent.com`, which page scripts may not read.
   - File page: the raw file, `/owner/repo/raw/<ref>/<path>`.
   - PR page: the whole PR diff, `/owner/repo/pull/N.diff`, once. It is reused for 60 seconds while you switch PR tabs.
@@ -37,6 +38,8 @@ Works in Chrome and Edge. Private repos use your existing GitHub login.
 
 ## Limits
 
+- Works on github.com only, not GitHub Enterprise servers.
+- Very large PRs may show an error if GitHub refuses or times out on the diff.
 - On PRs, only the lines shown in the diff are checked, not whole files.
 - Files using old Mac line endings (lone `\r`) show `no line breaks`.
 - UTF-16 text files count as binary and are skipped.
@@ -50,7 +53,7 @@ Open `test.html` in a browser. It prints `PASS` or the failing check.
 ## Package for the Chrome Web Store
 
 ```powershell
-Compress-Archive -Force -Path manifest.json,background.js,content.js,icon128.png -DestinationPath line-endings.zip
+Compress-Archive -Force -Path manifest.json,background.js,content.js,icon128.png,welcome.html -DestinationPath line-endings.zip
 ```
 
 Upload `line-endings.zip` in the Chrome Web Store Developer Dashboard. Raise `version` in `manifest.json` for each new upload.

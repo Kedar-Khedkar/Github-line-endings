@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitHub Line Endings</title>
+<link rel="icon" href="icon128.png">
+<style>
+  :root {
+    --bg: #f6f8fa; --card: #fff; --text: #1f2328; --muted: #59636e; --border: #d1d9e0;
+    --box: #24292f; --green: #1a7f37; --link: #0969da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --card: #151b23; --text: #f0f6fc; --muted: #9198a1; --border: #3d444d; --green: #3fb950; --link: #4493f8; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 -apple-system, "Segoe UI", system-ui, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 16px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  header img { width: 64px; height: 64px; }
+  h1 { margin: 0; font-size: 28px; line-height: 1.2; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+  h2 { margin: 0 0 8px; font-size: 18px; }
+  p, ul { margin: 8px 0; }
+  ul { padding-left: 20px; }
+  a { color: var(--link); }
+  code { font: 14px ui-monospace, Consolas, monospace; }
+  .demo { background: var(--box); color: #fff; font: 12px/1.5 ui-monospace, Consolas, monospace; padding: 6px 10px; border-radius: 6px; white-space: pre; overflow-x: auto; margin: 12px 0; }
+  .ok { color: var(--green); font-weight: 600; }
+  footer { color: var(--muted); font-size: 14px; text-align: center; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icon128.png" alt="">
+    <div>
+      <h1>GitHub Line Endings</h1>
+      <p><span class="ok">Installed.</span> GitHub shows LF and CRLF files the same way. Now you can tell them apart.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>On a file page</h2>
+    <p>Open any file on github.com. A box in the bottom-right corner shows its line endings:</p>
+    <div class="demo" aria-label="Example box">Line endings: CRLF</div>
+    <p>You will see <code>LF</code>, <code>CRLF</code>, <code>Mixed (3 CRLF, 40 LF)</code> or <code>no line breaks</code>. Images, PDFs and other binary files are skipped.</p>
+  </section>
+
+  <section>
+    <h2>On a pull request</h2>
+    <p>Every tab of a pull request lists the line endings of each changed file:</p>
+    <div class="demo" aria-label="Example box">▼ Line endings in diff: 1 CRLF, 2 LF
+CRLF  src/Program.cs
+LF    README.md
+LF    package.json</div>
+    <p>Click the first line of the box to minimize it. It stays minimized while you browse in that tab.</p>
+    <p>Only the lines shown in the diff are checked. Open the file itself to check the whole file.</p>
+  </section>
+
+  <section>
+    <h2>Try it</h2>
+    <ul>
+      <li><a href="https://github.com/microsoft/terminal/blob/main/OpenConsole.slnx">A CRLF file</a> (microsoft/terminal)</li>
+      <li><a href="https://github.com/git/git/blob/master/README.md">An LF file</a> (git/git)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Good to know</h2>
+    <ul>
+      <li>Works on github.com only, not GitHub Enterprise servers.</li>
+      <li>Files with old Mac line endings (a lone CR, no LF) show <code>no line breaks</code>.</li>
+      <li>UTF-16 text files are treated as binary and skipped, the same way Git treats them.</li>
+      <li>Files stored with Git LFS may not load.</li>
+      <li>Very large pull requests may show an error if GitHub refuses or times out on the diff.</li>
+      <li>New commits pushed to an open pull request appear within a minute, or right away when you reload the page.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Privacy</h2>
+    <p>Nothing is collected or sent anywhere. The extension only downloads the file or diff you are viewing from GitHub, with your own login, and forgets it when you leave.</p>
+  </section>
+
+  <footer>
+    <a href="https://github.com/Kedar-Khedkar/Github-line-endings">Source code and issues on GitHub</a>
+    <p>Built with <span aria-label="love">♥</span> by <a href="https://github.com/Kedar-Khedkar">Kedar Khedkar</a> · one line ending at a time</p>
+  </footer>
+</main>
+</body>
+</html>
