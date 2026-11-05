@@ -58,7 +58,7 @@ async function run() {
   if (url === fetched && Date.now() - fetchedAt < 60000) return void (text && document.body.append(box));
   text = fetched = ''; box.remove();
   const href = last;
-  const res = await chrome.runtime.sendMessage('https://github.com' + url);
+  const res = await chrome.runtime.sendMessage(location.origin + url);
   if (href !== location.pathname) return; // user navigated away meanwhile
   text = res.error ? 'Line endings: ' + res.error : render(res.text);
   if (!res.error) { fetched = url; fetchedAt = Date.now(); } // errors retry on the next navigation

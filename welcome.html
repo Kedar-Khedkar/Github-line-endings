@@ -22,8 +22,8 @@
   header p { margin: 4px 0 0; color: var(--muted); }
   section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
   h2 { margin: 0 0 8px; font-size: 18px; }
-  p, ul { margin: 8px 0; }
-  ul { padding-left: 20px; }
+  p, ul, ol { margin: 8px 0; }
+  ul, ol { padding-left: 20px; }
   a { color: var(--link); }
   code { font: 14px ui-monospace, Consolas, monospace; }
   .demo { background: var(--box); color: #fff; font: 12px/1.5 ui-monospace, Consolas, monospace; padding: 6px 10px; border-radius: 6px; white-space: pre; overflow-x: auto; margin: 12px 0; }
@@ -37,13 +37,13 @@
     <img src="icon128.png" alt="">
     <div>
       <h1>GitHub Line Endings</h1>
-      <p><span class="ok">Installed.</span> GitHub shows LF and CRLF files the same way. Now you can tell them apart.</p>
+      <p><span class="ok">Installed.</span> GitHub shows LF and CRLF files the same way. Now you can tell them apart, on github.com and GitHub Enterprise.</p>
     </div>
   </header>
 
   <section>
     <h2>On a file page</h2>
-    <p>Open any file on github.com. A box in the bottom-right corner shows its line endings:</p>
+    <p>Open any file on GitHub. A box in the bottom-right corner shows its line endings:</p>
     <div class="demo" aria-label="Example box">Line endings: CRLF</div>
     <p>You will see <code>LF</code>, <code>CRLF</code>, <code>Mixed (3 CRLF, 40 LF)</code> or <code>no line breaks</code>. Images, PDFs and other binary files are skipped.</p>
   </section>
@@ -60,6 +60,17 @@ LF    package.json</div>
   </section>
 
   <section>
+    <h2>Works with GitHub Enterprise</h2>
+    <p>Use it on your company's GitHub too, whatever its address. Turn it on once:</p>
+    <ol>
+      <li>Open your company's GitHub site.</li>
+      <li>Click the extension's icon in the toolbar (it may be under the puzzle-piece menu).</li>
+      <li>Allow access.</li>
+    </ol>
+    <p>It then works there just like on github.com, every time.</p>
+  </section>
+
+  <section>
     <h2>Try it</h2>
     <ul>
       <li><a href="https://github.com/microsoft/terminal/blob/main/OpenConsole.slnx">A CRLF file</a> (microsoft/terminal)</li>
@@ -70,7 +81,6 @@ LF    package.json</div>
   <section>
     <h2>Good to know</h2>
     <ul>
-      <li>Works on github.com only, not GitHub Enterprise servers.</li>
       <li>Files with old Mac line endings (a lone CR, no LF) show <code>no line breaks</code>.</li>
       <li>UTF-16 text files are treated as binary and skipped, the same way Git treats them.</li>
       <li>Files stored with Git LFS may not load.</li>
