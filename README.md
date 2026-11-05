@@ -3,6 +3,8 @@
 A Chrome extension that shows whether code on GitHub uses **LF** or **CRLF** line endings.
 GitHub renders both the same way, so you normally can't tell.
 
+Works on **github.com** and on **GitHub Enterprise**, whatever domain your company hosts it on.
+
 ![icon](icon128.png)
 
 ## What it shows
@@ -18,6 +20,16 @@ Click the PR box header to minimize it to the summary line. It stays minimized w
 
 Binary files (images, PDFs, Office documents, ...) are skipped.
 
+## GitHub Enterprise support
+
+Works on any GitHub Enterprise site, such as `https://github.mycompany.com`:
+
+1. Open your Enterprise site.
+2. Click the extension's toolbar icon (it may be under the puzzle-piece menu).
+3. Allow access.
+
+From then on it works there just like on github.com, including after browser restarts. Turn a site off again under the extension's **Site access** settings in `chrome://extensions`.
+
 ## Install (development)
 
 1. Clone this repo.
@@ -27,13 +39,9 @@ Binary files (images, PDFs, Office documents, ...) are skipped.
 
 Works in Chrome and Edge. Private repos use your existing GitHub login.
 
-### GitHub Enterprise
-
-Open your Enterprise site (for example `https://github.mycompany.com`), click the extension's toolbar icon and allow access. From then on it works there like on github.com. Remove a site again under the extension's **Site access** settings in `chrome://extensions`.
-
 ## How it works
 
-- `content.js` runs on github.com pages. It watches the URL (GitHub changes pages without reloading) and draws the box.
+- `content.js` runs on github.com and enabled Enterprise pages. It watches the URL (GitHub changes pages without reloading) and draws the box.
 - Clicking the toolbar icon on an Enterprise site asks for access to that domain and its subdomains (file downloads redirect to `raw.` or `media.` subdomains), then registers `content.js` there permanently.
 - `welcome.html` opens once, right after the extension is installed.
 - `background.js` downloads the data, because the PR `.diff` redirects to `patch-diff.githubusercontent.com`, which page scripts may not read.
@@ -43,7 +51,6 @@ Open your Enterprise site (for example `https://github.mycompany.com`), click th
 
 ## Limits
 
-- GitHub Enterprise sites must be enabled one by one (see above).
 - Very large PRs may show an error if GitHub refuses or times out on the diff.
 - On PRs, only the lines shown in the diff are checked, not whole files.
 - Files using old Mac line endings (lone `\r`) show `no line breaks`.
