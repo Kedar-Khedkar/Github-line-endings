@@ -8,6 +8,9 @@
     "https://raw.githubusercontent.com/*",
     "https://patch-diff.githubusercontent.com/*"
   ],
+  "permissions": ["activeTab", "scripting"],
+  "optional_host_permissions": ["https://*/*"],
+  "action": { "default_title": "Enable line endings on this GitHub Enterprise site", "default_icon": "icon128.png" },
   "icons": { "128": "icon128.png" },
   "background": { "service_worker": "background.js" },
   "content_scripts": [{ "matches": ["https://github.com/*"], "js": ["content.js"] }]

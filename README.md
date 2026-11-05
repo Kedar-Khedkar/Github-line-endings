@@ -27,9 +27,14 @@ Binary files (images, PDFs, Office documents, ...) are skipped.
 
 Works in Chrome and Edge. Private repos use your existing GitHub login.
 
+### GitHub Enterprise
+
+Open your Enterprise site (for example `https://github.mycompany.com`), click the extension's toolbar icon and allow access. From then on it works there like on github.com. Remove a site again under the extension's **Site access** settings in `chrome://extensions`.
+
 ## How it works
 
 - `content.js` runs on github.com pages. It watches the URL (GitHub changes pages without reloading) and draws the box.
+- Clicking the toolbar icon on an Enterprise site asks for access to that domain and its subdomains (file downloads redirect to `raw.` or `media.` subdomains), then registers `content.js` there permanently.
 - `welcome.html` opens once, right after the extension is installed.
 - `background.js` downloads the data, because the PR `.diff` redirects to `patch-diff.githubusercontent.com`, which page scripts may not read.
   - File page: the raw file, `/owner/repo/raw/<ref>/<path>`.
@@ -38,7 +43,7 @@ Works in Chrome and Edge. Private repos use your existing GitHub login.
 
 ## Limits
 
-- Works on github.com only, not GitHub Enterprise servers.
+- GitHub Enterprise sites must be enabled one by one (see above).
 - Very large PRs may show an error if GitHub refuses or times out on the diff.
 - On PRs, only the lines shown in the diff are checked, not whole files.
 - Files using old Mac line endings (lone `\r`) show `no line breaks`.
